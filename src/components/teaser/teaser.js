@@ -70,10 +70,6 @@ const imageSizesHero = [
 
 const Teaser = ({ content, config, component = true }) => {
   const context = useContext(AppContext);
-  let inFrame = false;
-  if (window.location !== window.parent.location) {
-    inFrame = true;
-  }
 
   const renderAsset = ({ asset }) => {
     const imageProps = {
@@ -125,7 +121,7 @@ const Teaser = ({ content, config, component = true }) => {
 
   console.log(content.style);
   if(content && content.style === 'hero') return <div className={`teaser ${content.style}`} {...editorProps}>{hero()}</div>;
-  if(content && content.style === 'fifty-fifty') return <FiftyFifty asset={renderAsset(content)} content={content}/>;
+  if(content && content.style === 'fifty-fifty') return <FiftyFifty editorProps={editorProps} asset={renderAsset(content)} content={content}/>;
   
 };
 

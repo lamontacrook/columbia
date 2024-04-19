@@ -22,6 +22,7 @@ const ModelManager = ({ content, dataAueProp }) => {
     const editorProps = {
       'data-aue-resource': `urn:aemconnection:${content._path}/jcr:content/data/${content._variation}`,
       'data-aue-type': 'reference',
+      'data-aue-filter': 'cf',
       'data-aue-label': title,
       'data-aue-model': content?._model?._path,
       'data-aue-behavior': 'component',

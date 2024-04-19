@@ -33,7 +33,7 @@ const imageSizes = [
   }
 ];
 
-const CollectionsCarousel = ({ content, config, component = true }) => {
+const CollectionsCarousel = ({ content, config, component = true, editorProps }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const settings = {
@@ -53,16 +53,30 @@ const CollectionsCarousel = ({ content, config, component = true }) => {
     'data-aue-label': 'Asset'
   };
 
+  const carouselItem = (content) => {
+    return {
+      'data-aue-resource': `urn:aemconnection:${content._path}/jcr:content/data/${content._variation}`,
+      'data-aue-type': 'reference',
+      'data-aue-filter': 'cf',
+      'data-aue-label': content.title,
+      'data-aue-model': content?._model?._path,
+      'data-aue-behavior': 'component',
+    };
+  };
+
+  editorProps['data-aue-behavior'] = 'component';
+  editorProps['data-aue-type'] = 'container';
+
   return (
-    <div className='coll-carousel'>
-      <h2>Latest Collections</h2>
+    <div className='coll-carousel' {...editorProps}>
+      <h2 data-aue-prop='title' data-aue-type='text' data-aue-label='Title'>{content.title}</h2>
       <div className="carousel">
         <Slider {...settings}>
           {content.collectionItems && content.collectionItems.map((item, i) => (
-            <div className="carousel-item" key={i}>
+            <div className="carousel-item" key={i} {...carouselItem(item)}>
               <Image imageProps={imageProps} asset={item.asset} alt={item.title} config={config} imageSizes={imageSizes} />
-              <h3>{item.title}</h3>
-              <span dangerouslySetInnerHTML={{__html: item.description.html}} />
+              <h3 data-aue-prop='title' data-aue-type='text' data-aue-label='Title'>{item.title}</h3>
+              <span data-aue-prop='description' data-aue-type='text' data-aue-label='Description' dangerouslySetInnerHTML={{__html: item.description.html}} />
               <a href={item.link}>{item.callToAction}</a>
             </div>
           ))}
@@ -77,7 +91,8 @@ CollectionsCarousel.propTypes = {
   content: PropTypes.object,
   config: PropTypes.object,
   context: PropTypes.object,
-  component: PropTypes.bool
+  component: PropTypes.bool,
+  editorProps: PropTypes.object
 };
 
 export default CollectionsCarousel;

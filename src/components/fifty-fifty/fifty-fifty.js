@@ -44,17 +44,21 @@ DescriptionContainer.propTypes = {
   item: PropTypes.object
 };
 
-const FiftyFifty = ({ content, asset }) => {
+const FiftyFifty = ({ content, asset, editorProps }) => {
+
+  editorProps['data-aue-behavior'] = 'component';
+  editorProps['data-aue-type'] = 'container';
+
   return (
-    <div className='teaser fifty-fifty'>
+    <div className='teaser fifty-fifty' {...editorProps}>
       <div className='container media'>
         {asset}
       </div>
       <div className='container description'>
         <div className='wrapper'>
           {/* <img src={item.image} alt={item.title} width='' height='' /> */}
-          <h3>{content.title}</h3>
-          <div>{mapJsonRichText(content.description.json)}</div>
+          <h3 data-aue-prop='title' data-aue-type='text' data-aue-label='Title'>{content.title}</h3>
+          <div data-aue-prop='description' data-aue-type='text' data-aue-label='Description'>{mapJsonRichText(content.description.json)}</div>
           <a href={content.link._path}>{content.callToAction}</a>
         </div>
       </div>
@@ -64,7 +68,8 @@ const FiftyFifty = ({ content, asset }) => {
 
 FiftyFifty.propTypes = {
   content: PropTypes.object,
-  asset: PropTypes.string
+  asset: PropTypes.string,
+  editorProps: PropTypes.object
 };
 
 export default FiftyFifty;

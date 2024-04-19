@@ -7,7 +7,6 @@ import './productlist.css';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import FiftyFifty from '../fifty-fifty/fifty-fifty';
 
 const imageSizes = [
   {
