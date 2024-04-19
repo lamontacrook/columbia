@@ -43,6 +43,7 @@ const Screen = () => {
         <div key={item.path} className='main-body' {...editorProps} 
           data-aue-label={item._model.title} 
           data-aue-model={item._model._path}
+          data-aue-prop='block'
           data-aue-resource={`urn:aemconnection:${item._path}/jcr:content/data/${item._variation}`}>
           <ModelManager key={item.path} content={item.hero} dataAueProp='hero'></ModelManager>
           {item && item.blocks.map((block) => (

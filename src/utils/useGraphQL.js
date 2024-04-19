@@ -26,7 +26,7 @@ export function useGraphQL(path, params = {}) {
         endpoint: '/content/_cq_graphql/headless/endpoint.json'
       });
       const request = sdk.runPersistedQuery.bind(sdk);
-
+      params['ts'] = new Date().getTime();
       request(`headless/${path}`, params, { credentials: 'include' })
         .then(({ data, errors }) => {
           //If there are errors in the response set the error message

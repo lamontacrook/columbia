@@ -61,11 +61,11 @@ const Panel = ({ style, panel }) => {
         ))}
 
       </div>
-      <div className='panel-right'>
+      {/* <div className='panel-right'>
         {panels.map((p) => (
           <Image key={p.slug} imageProps={imageProps} asset={p.asset} title={p.title} alt={p.description} imageSizes={imageSizes} />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useGraphQL } from '../../utils/useGraphQL';
 import Loading from '../loading';
 import Panel from '../panel';
@@ -6,15 +6,17 @@ import ColumbiaLogo from '../../media/columbia-logo.png';
 import ShoppingBagIcon from '../../media/shopping-bag-icon.svg';
 import UserAccountIcon from '../../media/user-account-icon-1.svg';
 import SearchIcon from '../../media/search-icon.svg';
+import { AppContext } from '../../utils/context';
 
 import './navigation.css';
 
 const Navigation = () => {
+  const context = useContext(AppContext);
   const [panel, setPanel] = useState(null);
   const [style, setStyle] = useState('');
   
   const persistentQuery = 'navigation';
-  const { data, errorMessage } = useGraphQL(persistentQuery);
+  const { data, errorMessage } = useGraphQL(persistentQuery, {project: context.project});
 
   if (errorMessage) return;
 
